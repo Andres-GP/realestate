@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import PropertyCard from "@/components/property-card"
-import PropertyFilters from "@/components/property-filters"
-import PropertySearch from "@/components/property-search"
-import { Loader2 } from "lucide-react"
-import type { Property } from "@/lib/types"
-import { mockProperties } from "@/lib/mock-properties"
+import { useState, useEffect } from "react";
+import PropertyCard from "@/components/property-card";
+import PropertyFilters from "@/components/property-filters";
+import PropertySearch from "@/components/property-search";
+import { Loader2 } from "lucide-react";
+import type { Property } from "@/lib/types";
+import { mockProperties } from "@/lib/mock-properties";
 
 /**
  * PropertyListings Component
@@ -21,41 +21,41 @@ import { mockProperties } from "@/lib/mock-properties"
  * \`\`\`
  */
 export default function PropertyListings() {
-  const [properties, setProperties] = useState<Property[]>([])
-  const [filteredProperties, setFilteredProperties] = useState<Property[]>([])
-  const [loading, setLoading] = useState(true)
-  const [searchQuery, setSearchQuery] = useState("")
+  const [properties, setProperties] = useState<Property[]>([]);
+  const [filteredProperties, setFilteredProperties] = useState<Property[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
   const [filters, setFilters] = useState({
     type: "all",
     minPrice: 0,
     maxPrice: 10000000,
     bedrooms: "all",
     status: "all",
-  })
+  });
 
   useEffect(() => {
-    fetchProperties()
-  }, [])
+    fetchProperties();
+  }, []);
 
   useEffect(() => {
-    applyFilters()
-  }, [properties, searchQuery, filters])
+    applyFilters();
+  }, [properties, searchQuery, filters]);
 
   const fetchProperties = async () => {
     try {
-      setLoading(true)
-      await new Promise((resolve) => setTimeout(resolve, 800))
-      setProperties(mockProperties)
-      setFilteredProperties(mockProperties)
+      setLoading(true);
+      await new Promise((resolve) => setTimeout(resolve, 800));
+      setProperties(mockProperties);
+      setFilteredProperties(mockProperties);
     } catch (error) {
-      console.error("Error fetching properties:", error)
+      console.error("Error fetching properties:", error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const applyFilters = () => {
-    let filtered = [...properties]
+    let filtered = [...properties];
 
     // Search filter
     if (searchQuery) {
@@ -63,30 +63,37 @@ export default function PropertyListings() {
         (property) =>
           property.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
           property.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          property.description.toLowerCase().includes(searchQuery.toLowerCase()),
-      )
+          property.description.toLowerCase().includes(searchQuery.toLowerCase())
+      );
     }
 
     // Type filter
     if (filters.type !== "all") {
-      filtered = filtered.filter((property) => property.type === filters.type)
+      filtered = filtered.filter((property) => property.type === filters.type);
     }
 
     if (filters.status !== "all") {
-      filtered = filtered.filter((property) => property.status === filters.status)
+      filtered = filtered.filter(
+        (property) => property.status === filters.status
+      );
     }
 
     // Price filter
-    filtered = filtered.filter((property) => property.price >= filters.minPrice && property.price <= filters.maxPrice)
+    filtered = filtered.filter(
+      (property) =>
+        property.price >= filters.minPrice && property.price <= filters.maxPrice
+    );
 
     // Bedrooms filter
     if (filters.bedrooms !== "all") {
-      const bedroomCount = Number.parseInt(filters.bedrooms)
-      filtered = filtered.filter((property) => property.bedrooms >= bedroomCount)
+      const bedroomCount = Number.parseInt(filters.bedrooms);
+      filtered = filtered.filter(
+        (property) => property.bedrooms >= bedroomCount
+      );
     }
 
-    setFilteredProperties(filtered)
-  }
+    setFilteredProperties(filtered);
+  };
 
   return (
     <section id="properties" className="py-20 lg:py-32">
@@ -96,23 +103,28 @@ export default function PropertyListings() {
             Featured Properties
           </h2>
           <p className="text-lg text-muted-foreground text-pretty leading-relaxed">
-            Discover our carefully curated selection of exceptional properties, each offering unique character and
-            unparalleled quality
+            Discover our carefully curated selection of exceptional properties,
+            each offering unique character and unparalleled quality
           </p>
         </div>
 
         <div className="space-y-8 mb-12">
-          <PropertySearch searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+          <PropertySearch
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+          />
           <PropertyFilters filters={filters} setFilters={setFilters} />
         </div>
 
         {loading ? (
-          <div className="flex items-center justify-center py-20">
+          <div className="flex items-center justify-center py-20" role="status">
             <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
           </div>
         ) : filteredProperties.length === 0 ? (
           <div className="text-center py-20">
-            <p className="text-lg text-muted-foreground">No properties found matching your criteria</p>
+            <p className="text-lg text-muted-foreground">
+              No properties found matching your criteria
+            </p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -123,5 +135,5 @@ export default function PropertyListings() {
         )}
       </div>
     </section>
-  )
+  );
 }
