@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { ArrowDown } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { ArrowDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 /**
  * Hero Component
@@ -17,9 +17,9 @@ import { Button } from "@/components/ui/button"
  */
 export default function Hero() {
   const scrollToListings = () => {
-    const listingsSection = document.getElementById("properties")
-    listingsSection?.scrollIntoView({ behavior: "smooth" })
-  }
+    const listingsSection = document.getElementById("properties");
+    listingsSection?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -43,11 +43,16 @@ export default function Hero() {
           </h1>
 
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
-            Explore exceptional properties curated for those who appreciate refined living and architectural excellence
+            Explore exceptional properties curated for those who appreciate
+            refined living and architectural excellence
           </p>
 
           <div className="flex items-center justify-center pt-4">
-            <Button size="lg" onClick={scrollToListings} className="text-base px-8">
+            <Button
+              size="lg"
+              onClick={scrollToListings}
+              className="text-base px-8"
+            >
               Explore Properties
             </Button>
           </div>
@@ -62,5 +67,5 @@ export default function Hero() {
         </button>
       </div>
     </section>
-  )
+  );
 }
