@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Bed, Bath, Maximize, MapPin } from "lucide-react"
-import type { Property } from "@/lib/types"
+import { useState } from "react";
+import Link from "next/link";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Bed, Bath, Maximize, MapPin } from "lucide-react";
+import type { Property } from "@/lib/types";
 
 interface PropertyCardProps {
-  property: Property
+  property: Property;
 }
 
 /**
@@ -27,7 +27,7 @@ interface PropertyCardProps {
  * \`\`\`
  */
 export default function PropertyCard({ property }: PropertyCardProps) {
-  const [imageLoaded, setImageLoaded] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const formatPrice = (price: number) => {
     if (property.status === "rent") {
@@ -38,15 +38,15 @@ export default function PropertyCard({ property }: PropertyCardProps) {
           minimumFractionDigits: 0,
           maximumFractionDigits: 0,
         }).format(price) + "/mo"
-      )
+      );
     }
     return new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
-    }).format(price)
-  }
+    }).format(price);
+  };
 
   return (
     <Link href={`/property/${property.id}`}>
@@ -60,7 +60,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
             }`}
             onLoad={() => setImageLoaded(true)}
           />
-          <Badge className="absolute top-4 right-4 capitalize bg-background/90 backdrop-blur-sm">
+          <Badge className="absolute top-4 right-4 capitalize bg-background/90 backdrop-blur-sm text-stone-700">
             For {property.status}
           </Badge>
         </div>
@@ -71,7 +71,9 @@ export default function PropertyCard({ property }: PropertyCardProps) {
               <h3 className="text-xl font-semibold group-hover:text-primary transition-colors line-clamp-1">
                 {property.title}
               </h3>
-              <p className="text-xl font-bold whitespace-nowrap">{formatPrice(property.price)}</p>
+              <p className="text-xl font-bold whitespace-nowrap">
+                {formatPrice(property.price)}
+              </p>
             </div>
 
             <div className="flex items-center gap-1 text-sm text-muted-foreground">
@@ -79,7 +81,6 @@ export default function PropertyCard({ property }: PropertyCardProps) {
               <span className="line-clamp-1">{property.location}</span>
             </div>
           </div>
-
           <div className="flex items-center gap-4 pt-2 border-t border-border">
             <div className="flex items-center gap-1.5 text-sm">
               <Bed className="w-4 h-4 text-muted-foreground" />
@@ -97,5 +98,5 @@ export default function PropertyCard({ property }: PropertyCardProps) {
         </CardContent>
       </Card>
     </Link>
-  )
+  );
 }
