@@ -25,15 +25,39 @@ Built using **Next.js**, **TypeScript**, **TailwindCSS**, and **Radix UI**.
 
 ## 🧰 Tech Stack
 
-| Category             | Technology                            |
-| -------------------- | -------------------------------------- |
-| **Framework**        | Next.js 14                             |
-| **Language**         | TypeScript                             |
-| **Styling**          | TailwindCSS, tailwind-merge, animate   |
-| **UI Components**    | Radix UI, Geist, Lucide Icons          |
-| **Themes**           | next-themes                            |
-| **Analytics**        | Vercel Analytics                       |
-| **Testing**          | Vitest                                 |
+| Category          | Technology                           |
+| ----------------- | ------------------------------------ |
+| **Framework**     | Next.js 14                           |
+| **Language**      | TypeScript                           |
+| **Styling**       | TailwindCSS, tailwind-merge, animate |
+| **UI Components** | Radix UI, Geist, Lucide Icons        |
+| **Themes**        | next-themes                          |
+| **Analytics**     | Vercel Analytics                     |
+| **Testing**       | Vitest                               |
 
 ---
 
+## ⚙️ CI/CD & Automation
+
+This project includes a full GitHub Actions workflow for continuous integration, testing, and deployment:
+
+- **Continuous Integration (CI)**
+
+  - Runs on `push` or `pull_request` events to `master`.
+  - Lints code with **ESLint**.
+  - Builds the project.
+  - Runs **unit and integration tests** using **Jest**.
+
+- **Continuous Deployment (CD)**
+
+  - Automatic deployment to **Vercel** after CI succeeds.
+  - Manual approval required for production deployment.
+  - Discord notifications for successful production deployments.
+
+- **Performance & Quality Checks**
+
+  - Weekly **Lighthouse audits** scheduled with GitHub Actions.
+  - Dependabot keeps **npm dependencies** and **GitHub Actions** up-to-date weekly.
+
+- **Reusable Workflows**
+  - CI tasks are modularized in a **reusable workflow** for maintainability and consistency.
