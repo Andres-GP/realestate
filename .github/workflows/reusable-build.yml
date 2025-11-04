@@ -7,11 +7,6 @@ on:
         required: false
         type: string
         default: "22"
-    secrets:
-      GRAPHCMS_TOKEN:
-        required: true
-      NEXT_PUBLIC_GRAPHCMS_ENDPOINT:
-        required: true
 
 jobs:
   build:
